@@ -1,0 +1,57 @@
+/* NavBar.css */
+nav{
+  height: 48px;
+  display: flex;
+  border: none;
+
+}
+.appName{
+ 
+  font-family: cursive;
+  font-size: 20px;
+  /* width: 190px; */
+  height: max-content;
+  margin: 10px;
+  width: 12%;
+  border: none;
+
+
+}
+.nav-links {
+  list-style-type: none;
+
+  width: 68%;
+}
+
+.nav-links li {
+  display: inline;
+  /* border: 1px solid black;  */
+  color: rgb(48, 46, 46);
+  font-size: 20px;/* Change the display to inline */
+  padding: 17px 29px 10px 25px /* Add some space between list items */
+}
+
+.nav-links li:hover{
+  background-color: black;
+  color: white;
+  /* display: cursor; */
+  cursor: pointer;
+}
+
+.Login{
+  border: none;
+  height: 38px;
+  background-color: rgb(70, 70, 206);
+  border-radius: 18px;
+  width: 87px;
+  color: white;
+  font-family: cursive;
+  margin: auto;
+}
+  
+.Login:hover{
+  background-color: rgb(106, 0, 0);
+  color: white;
+  /* display: cursor; */
+  cursor: pointer;
+}
