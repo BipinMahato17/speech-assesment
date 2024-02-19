@@ -1,0 +1,22 @@
+# Ignore database files
+*.sqlite3
+
+# Ignore development and local settings
+*.pyc
+*.pyo
+__pycache__/
+*.bak
+*.swp
+*~
+
+# Ignore environment variables
+.env
+
+# Ignore static files directory
+static/
+
+# Ignore media files directory
+media/
+
+# Ignore virtual environment
+venv/
