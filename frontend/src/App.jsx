@@ -4,6 +4,7 @@ import Home from './Components/Home';
 import About from './Components/About';
 import MyLearning from './Components/MyLearning';
 import NavBar from './Components/NavBar';
+import LogIn from './Components/Login'
 import './App.css'; // Import the CSS file for styling
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         return <About />;
       case 'mylearning':
         return <MyLearning />;
+      case 'login':
+        return <LogIn/>;
       default:
         return <Home />;
     }
