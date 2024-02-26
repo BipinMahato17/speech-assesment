@@ -3,10 +3,11 @@ nav{
   height: 48px;
   display: flex;
   border: none;
+  background-color: #444040;
 
 }
 .appName{
- 
+  color:#f6ffff;
   font-family: cursive;
   font-size: 20px;
   /* width: 190px; */
@@ -39,7 +40,7 @@ nav{
 }
 .nav-links > li > a {
   text-decoration: none;
-  color: #2c2a2a;
+  color: #ffffff;
 }
 .Login{
   border: none;
@@ -57,4 +58,12 @@ nav{
   color: white;
   /* display: cursor; */
   cursor: pointer;
+}
+
+.Logintext{
+
+color: white;
+text-decoration: none;
+
+
 }
