@@ -32,12 +32,15 @@ nav{
 }
 
 .nav-links li:hover{
-  background-color: black;
+  background-color: rgb(155, 154, 154);
   color: white;
   /* display: cursor; */
   cursor: pointer;
 }
-
+.nav-links > li > a {
+  text-decoration: none;
+  color: #2c2a2a;
+}
 .Login{
   border: none;
   height: 38px;
