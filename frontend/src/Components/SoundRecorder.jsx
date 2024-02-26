@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import abcde from '../assets/abcde.jpg';
+import abcde from '../assets/abcde.png';
 import SoundRecorder from './SoundRecorder.css';
 const Recorder = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -99,22 +99,33 @@ const Recorder = () => {
   };
 
   return (
-    <div>
-      <div>
-        <img src = {abcde} alt="Recorder" />
-        {!isRecording && !isPaused && (
-          <button className="start " onClick={startRecording}>Start Recording</button>
-        )}
-        {isRecording && !isPaused && (
-          <>
-            <button className="stop " onClick={stopRecording}>Stop Recording</button>
-            <button className="pause "onClick={pauseRecording}>Pause Recording</button>
-          </>
-        )}
-        {isPaused && (
-          <button className="resume " onClick={resumeRecording}>Resume Recording</button>
-        )}
-        <button className="clear "onClick={clearRecording}>Clear</button>
+    <div className='main'>
+      <div className='recorder'>
+
+        <div className="questions">Why are you Creating this website. You Nigga !!!</div>
+
+        <div className='image'>
+          <img src = {abcde} alt="Recorder" />
+        </div>
+
+        <div className='buttons'>
+          {!isRecording && !isPaused && (
+            <button className="start " onClick={startRecording}>Start</button>
+          )}
+          {isRecording && !isPaused && (
+            <>
+              <button className="stop " onClick={stopRecording}>Stop</button>
+              <button className="pause "onClick={pauseRecording}>Pause</button>
+            </>
+          )}
+          {isPaused && (
+            <button className="resume " onClick={resumeRecording}>Resume</button>
+          )}
+          {!isRecording && (
+          <button className="clear "onClick={clearRecording}>Clear</button>
+          )}   
+        </div>
+
       </div>
       {recordedChunks.length > 0 && (
         <div>
