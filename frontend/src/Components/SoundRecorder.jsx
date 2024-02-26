@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import abcde from '../assets/abcde.jpg';
+import SoundRecorder from './SoundRecorder.css';
 const Recorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -100,19 +101,20 @@ const Recorder = () => {
   return (
     <div>
       <div>
+        <img src = {abcde} alt="Recorder" />
         {!isRecording && !isPaused && (
-          <button onClick={startRecording}>Start Recording</button>
+          <button className="start " onClick={startRecording}>Start Recording</button>
         )}
         {isRecording && !isPaused && (
           <>
-            <button onClick={stopRecording}>Stop Recording</button>
-            <button onClick={pauseRecording}>Pause Recording</button>
+            <button className="stop " onClick={stopRecording}>Stop Recording</button>
+            <button className="pause "onClick={pauseRecording}>Pause Recording</button>
           </>
         )}
         {isPaused && (
-          <button onClick={resumeRecording}>Resume Recording</button>
+          <button className="resume " onClick={resumeRecording}>Resume Recording</button>
         )}
-        <button onClick={clearRecording}>Clear</button>
+        <button className="clear "onClick={clearRecording}>Clear</button>
       </div>
       {recordedChunks.length > 0 && (
         <div>

@@ -1,0 +1,68 @@
+.start {
+    border: none;
+    height: 38px;
+    background-color: rgb(70, 70, 206);
+    border-radius: 18px;
+    width: 87px;
+    color: white;
+    font-family: cursive;
+    margin: auto;
+
+
+
+}
+
+.clear{
+    border: none;
+    height: 38px;
+    background-color: rgb(70, 70, 206);
+    border-radius: 18px;
+    width: 87px;
+    color: white;
+    font-family: cursive;
+    margin: auto;
+
+
+
+}
+
+.stop {
+    border: none;
+    height: 38px;
+    background-color: rgb(70, 70, 206);
+    border-radius: 18px;
+    width: 87px;
+    color: white;
+    font-family: cursive;
+    margin: auto;
+
+
+
+}
+
+.pause {
+    border: none;
+    height: 38px;
+    background-color: rgb(70, 70, 206);
+    border-radius: 18px;
+    width: 87px;
+    color: white;
+    font-family: cursive;
+    margin: auto;
+
+
+
+}
+.resume {
+    border: none;
+    height: 38px;
+    background-color: rgb(70, 70, 206);
+    border-radius: 18px;
+    width: 87px;
+    color: white;
+    font-family: cursive;
+    margin: auto;
+
+
+
+}
