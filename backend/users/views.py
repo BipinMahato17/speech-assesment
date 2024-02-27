@@ -34,14 +34,16 @@ def users(request):
 @api_view(['POST'])
 def UserLogin(request):
      if request.method == 'POST':
-          email = request.POST.get('email')
-          password = request.POST.get('password')
+          email = request.data.get('email')
+          password = request.data.get('password')
           user = authenticate(request, username=email, password=password)
           if user is not None:
                login(request,user)
-               
+               return Response({'message':'Login Successful'}, status=status.HTTP_200_OK)
           else:
                print("Invalid Email or Password.")
+               return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
      
 
 @api_view(['GET'])
