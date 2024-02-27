@@ -14,26 +14,21 @@ from .serializers import UserLoginSerializer, UserRegisterSerializer, UserSerial
 @api_view(['POST'])
 def users(request):
     if request.method == 'POST':
-        first_name = request.POST.get('firstName')
-        last_name = request.POST.get('lastName')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        rePassword = request.POST.get('rePassword')
-        if password == rePassword:
-                if not CustomUser.objects.filter(email=email).exists():
+        first_name = request.data.get('firstName')
+        last_name = request.data.get('lastName')
+        email = request.data.get('email')
+        password = request.data.get('password')
+        # rePassword = request.POST.get('rePassword')
+        # if password == rePassword:
+        if not CustomUser.objects.filter(email=email).exists():
                      
-                    # Create the user
-                    user = CustomUser.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name)
-                    serializer = UserRegisterSerializer(user)
-                    messages.success(request, 'User created successfully!')
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-                    print(user)
-                else:
-                    messages.error(request, 'Email is already in use.')
+            # Create the user
+            user = CustomUser.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name)
+            serializer = UserRegisterSerializer(user)
+            messages.success(request, 'User created successfully!')
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            print('password didnt match')
-            messages.error(request,'passwords do not match.')
+            messages.error(request, 'Email is already in use.')
  
 
 @api_view(['POST'])
