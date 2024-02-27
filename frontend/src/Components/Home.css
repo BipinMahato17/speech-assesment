@@ -100,9 +100,28 @@ body {
     border: 1px solid blue;
     border-radius: 50%;
 }
-.subtext{
+/* .subtext{
 
 margin:0;
 font-size: 17px;
 
-}
+} */
+
+/* Home.css */
+.subtext {
+    margin: 0;
+    font-size: 17px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0; /* Initial width set to 0 */
+    animation: typing 3s steps(40, end) forwards; /* Animation forwards to keep the final state */
+  }
+  
+  /* Typing animation */
+  @keyframes typing {
+    to {
+      width: 100%; /* Final width set to 100% */
+    }
+  }
+  
+  
