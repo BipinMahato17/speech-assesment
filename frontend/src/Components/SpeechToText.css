@@ -1,0 +1,60 @@
+/* .speech-to-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .text-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+  }
+  
+  .text-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-top:10px;
+  }
+  
+  .text-box p {
+    font-size: 16px;
+  }
+   */
+   .speech-to-text-container {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Use viewport height */
+    position: relative; /* Position relative for absolute positioning */
+  }
+  
+  .text-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+    margin-top: 20px; /* Add margin from the top */
+  }
+  
+  .text-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .text-box p {
+    font-size: 16px;
+    margin-top: 0; /* Remove default margin */
+  }
+  
+  .return-link {
+    position: absolute; /* Position absolute for absolute positioning */
+    bottom: 10px;
+    right: 10px;
+    text-decoration: none;
+    color: blue;
+    font-size: 16px;
+  }
+  
