@@ -3,6 +3,7 @@ import abcde from '../assets/abcde.png';
 import SoundRecorder from './SoundRecorder.css';
 import { Link } from 'react-router-dom';
 import Array from './Array.jsx';
+import axios from 'axios';
 
 const Recorder = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -11,7 +12,7 @@ const Recorder = () => {
   const [recorder, setRecorder] = useState(null);
   const [mediaStream, setMediaStream] = useState(null);
   const [timeElapsed, setTimeElapsed] = useState(0);
-  const maxRecordingTime = 45; // Maximum recording time in seconds
+  const maxRecordingTime = 60; // Maximum recording time in seconds
 
   useEffect(() => {
     if (!navigator.mediaDevices) {
@@ -101,6 +102,32 @@ const Recorder = () => {
     setRecordedChunks([]);
   };
 
+ 
+  const submitRecording = () => {
+    // Prompt the user for the file name
+    const enteredFileName = prompt('Enter the file name:', '');
+  
+    if (enteredFileName) { // If the user entered a file name
+      // Set the file name state
+      // setFileName(enteredFileName);
+  
+      // Sending recorded audio to backend
+      const formData = new FormData();
+      formData.append('name', enteredFileName); // Append entered file name
+      formData.append('audio', new Blob(recordedChunks, { type: 'audio/wav' }));
+      axios.post('http://127.0.0.1:8000/recorder/', formData)
+        .then(response => {
+          console.log('Audio uploaded successfully:', response);
+          // Handle success
+        })
+        .catch(error => {
+          console.error('Error uploading audio:', error);
+          // Handle error
+        });
+    }
+  };
+  
+
   return (
     <div className='main'>
       <div className='recorder'>
@@ -129,7 +156,7 @@ const Recorder = () => {
           )}   
            {recordedChunks.length > 0 && (
             // <button className="submit" onClick={submitRecording}>Submit</button>
-                <button><Link className="hello" to='/Submit'>Submit</Link></button>
+                <button className="submit" onClick={submitRecording}><Link className="hello" to='/Submit'>Submit</Link></button>
                 
             )}
         </div>

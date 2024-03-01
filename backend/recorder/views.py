@@ -3,16 +3,32 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import RecorderSerializer, ListRecorderSerializer, DeleteAudioFileSerializer
 from .models import recorder
+# Use a pipeline as a high-level helper
 
 # Create your views here.
 @api_view(['POST'])
 def create_recorder(request):
     if request.method == 'POST':
-        serializer = RecorderSerializer(data=request.data)
+        # Check if the 'audio' file is present in the request
+        if 'audio' not in request.FILES:
+            return Response({'error': 'No audio file was submitted.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        
+        # Retrieve the audio file and name from the request
+        audio_file = request.FILES['audio']
+        name = request.data.get('name')
+
+        # Create a new Recorder instance and set the audio file
+        serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file})
         if serializer.is_valid():
-            serializer.save()
+            serializer.save() 
+
+            # You can perform additional processing here, such as transcription
+            # transcribed_text = transcribe_audio(audio_file)
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['GET'])
 def recorder_list(request):
