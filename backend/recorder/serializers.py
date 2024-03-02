@@ -6,7 +6,7 @@ from .models import recorder
 class RecorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = recorder
-        fields = ['id', 'name', 'audio_file', 'dateTime', 'transcribed_text']
+        fields = ['id', 'name', 'audio_file', 'dateTime', 'transcribed_text', 'corrected_sentence']
         
 
     def create(self, validated_data):
@@ -14,7 +14,8 @@ class RecorderSerializer(serializers.ModelSerializer):
         return recorder.objects.create(
             name=validated_data['name'],
             audio_file=validated_data['audio_file'],
-            transcribed_text=validated_data['transcribed_text']
+            transcribed_text=validated_data['transcribed_text'],
+            corrected_sentence=validated_data['corrected_sentence'],
         )
 
 
