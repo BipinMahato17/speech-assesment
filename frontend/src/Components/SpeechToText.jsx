@@ -52,8 +52,6 @@ function SpeechToText() {
     }
   }, []);
 
-
-function SpeechToText() {
   return (
     <div className="speech-to-text-container">
       <div className="text-box">
@@ -67,6 +65,7 @@ function SpeechToText() {
       </div>
     </div>
   );
+
 }
 
 

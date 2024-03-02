@@ -40,22 +40,11 @@ def create_recorder(request):
         
         # Remove the temporary audio file
         os.remove(temp_audio_path)
-        
+       
         # Create a new Recorder instance and set the audio file
-        serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file, 'transcribed_text': transcribed_text})
-        
-        # Retrieve the audio file and name from the request
-        audio_file = request.FILES['audio']
-        name = request.data.get('name')
-
-        # Create a new Recorder instance and set the audio file
-        serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file})
+        serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file, 'transcribed_text':transcribed_text})
         if serializer.is_valid():
             serializer.save() 
-
-            # You can perform additional processing here, such as transcription
-            # transcribed_text = transcribe_audio(audio_file)
-
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

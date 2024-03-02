@@ -1,9 +1,9 @@
 import React from 'react';
 import './About.css';
-import soni_img from '../assets/soni.png';
-import bipin_img from '../assets/bipin.png';
-import biwas_img from '../assets/biwas.png';
-import ayush_img from '../assets/ayush.png';
+import soni_img from '../assets/bipin.jpg';
+import bipin_img from '../assets/bipin.jpg';
+import biwas_img from '../assets/bipin.jpg';
+import ayush_img from '../assets/bipin.jpg';
 // import '../assets/icon.png';
 
 const About = () => {
