@@ -4,12 +4,17 @@ from .models import recorder
 class RecorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = recorder
-        fields = "__all__"
+        fields = ['id', 'name', 'audio_file', 'dateTime', 'transcribed_text']
+        
 
     def create(self, validated_data):
-        audio_file = validated_data.pop('audio_file')
-        recorder_instance = recorder.objects.create(audio_file=audio_file, **validated_data)
-        return recorder_instance
+        print("inside the serializer.py")
+        return recorder.objects.create(
+            name=validated_data['name'],
+            audio_file=validated_data['audio_file'],
+            transcribed_text=validated_data['transcribed_text']
+        )
+        
     
 class DeleteAudioFileSerializer(serializers.Serializer):
     pk = serializers.IntegerField()
