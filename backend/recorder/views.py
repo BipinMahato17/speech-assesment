@@ -79,7 +79,9 @@ def delete_audio_file(request):
             
             recorder_instance.audio_file.delete()  # Delete the audio file from storage
             return Response("Audio file deleted successfully.", status=status.HTTP_204_NO_CONTENT)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
 def grammar_correction(transcribed_text):
     print("entered grammar corection function/////////////////")
@@ -87,3 +89,4 @@ def grammar_correction(transcribed_text):
     GEC_sentence=corrected_sentence[0]['generated_text']
     # print(GEC_sentence)
     return GEC_sentence
+
