@@ -10,6 +10,7 @@ import os
 from transformers import pipeline
 pipe = pipeline("automatic-speech-recognition", model="openai/whisper-small.en")
 
+GEC_pipe = pipeline("text2text-generation", model="kalobiralo/t5-grammar269k-model")
 
 # Create your views here.
 @api_view(['POST'])
@@ -33,16 +34,17 @@ def create_recorder(request):
             transcribe_result = pipe(temp_audio_path)
             transcribed_text = transcribe_result['text']
             print(transcribe_result['text'])
-            # transcribed_text = transcribe_result[0]['transcription']
+            
         except Exception as e:
             os.remove(temp_audio_path)  # Remove the temporary audio file
             return Response({'error': f'Error transcribing audio: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         # Remove the temporary audio file
         os.remove(temp_audio_path)
-       
+        corrected_sentence = grammar_correction(transcribe_result['text'])
+        print(corrected_sentence)
         # Create a new Recorder instance and set the audio file
-        serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file, 'transcribed_text':transcribed_text})
+        serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file, 'transcribed_text':transcribed_text, 'corrected_sentence':corrected_sentence})
         if serializer.is_valid():
             serializer.save() 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -77,4 +79,14 @@ def delete_audio_file(request):
             
             recorder_instance.audio_file.delete()  # Delete the audio file from storage
             return Response("Audio file deleted successfully.", status=status.HTTP_204_NO_CONTENT)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+def grammar_correction(transcribed_text):
+    print("entered grammar corection function/////////////////")
+    corrected_sentence = GEC_pipe(transcribed_text)
+    GEC_sentence=corrected_sentence[0]['generated_text']
+    # print(GEC_sentence)
+    return GEC_sentence
+

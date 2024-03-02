@@ -6,6 +6,7 @@ class recorder(models.Model):
     audio_file = models.FileField(upload_to='audio_files/')
     dateTime = models.DateTimeField(auto_now_add=True)
     transcribed_text = models.TextField()
+    corrected_sentence = models.TextField()
 
     def __str__(self):
         return self.name
