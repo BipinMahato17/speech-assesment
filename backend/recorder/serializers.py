@@ -6,12 +6,18 @@ from transformers import pipeline
 class RecorderSerializer(serializers.ModelSerializer):
     class Meta:
         model = recorder
-        fields = "__all__"
+        fields = ['id', 'name', 'audio_file', 'dateTime', 'transcribed_text']
+        
 
     def create(self, validated_data):
         print("inside the serializer.py")
         return recorder.objects.create(
             name=validated_data['name'],
+
+            audio_file=validated_data['audio_file'],
+            transcribed_text=validated_data['transcribed_text']
+        )
+
             audio_file=validated_data['audio_file']
         )
         # audio_file = validated_data.pop('audio_file')
@@ -28,6 +34,7 @@ class RecorderSerializer(serializers.ModelSerializer):
     #     transcription = asr_pipeline(audio_data)
 
     #     return transcription
+
     
 class DeleteAudioFileSerializer(serializers.Serializer):
     pk = serializers.IntegerField()

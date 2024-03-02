@@ -3,7 +3,13 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import RecorderSerializer, ListRecorderSerializer, DeleteAudioFileSerializer
 from .models import recorder
+
+import tempfile
+import os
 # Use a pipeline as a high-level helper
+from transformers import pipeline
+pipe = pipeline("automatic-speech-recognition", model="openai/whisper-small.en")
+
 
 # Create your views here.
 @api_view(['POST'])
@@ -13,6 +19,30 @@ def create_recorder(request):
         if 'audio' not in request.FILES:
             return Response({'error': 'No audio file was submitted.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Retrieve the audio file and name from the request
+        audio_file = request.FILES['audio']
+        name = request.data.get('name')
+        
+        # Save the audio file temporarily
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_audio_file:
+            temp_audio_path = temp_audio_file.name
+            for chunk in audio_file.chunks():
+                temp_audio_file.write(chunk)
+        # Transcribe audio using ASR pipeline
+        try:
+            transcribe_result = pipe(temp_audio_path)
+            transcribed_text = transcribe_result['text']
+            print(transcribe_result['text'])
+            # transcribed_text = transcribe_result[0]['transcription']
+        except Exception as e:
+            os.remove(temp_audio_path)  # Remove the temporary audio file
+            return Response({'error': f'Error transcribing audio: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        # Remove the temporary audio file
+        os.remove(temp_audio_path)
+        
+        # Create a new Recorder instance and set the audio file
+        serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file, 'transcribed_text': transcribed_text})
         
         # Retrieve the audio file and name from the request
         audio_file = request.FILES['audio']
@@ -30,10 +60,15 @@ def create_recorder(request):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+
 @api_view(['GET'])
 def recorder_list(request):
     if request.method == 'GET':
-        recorders = recorder.objects.all()
+        # recorders = recorder.objects.all()
+        # Fetch the latest recording based on timestamp
+        recorders = recorder.objects.order_by('-dateTime')
+        
         if not recorders:
             return Response([], status=status.HTTP_200_OK)
         serializer = ListRecorderSerializer(recorders, many=True)
