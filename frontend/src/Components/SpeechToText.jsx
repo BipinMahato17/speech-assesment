@@ -60,9 +60,7 @@ function SpeechToText() {
         <p>{transcribedText}</p>
 
       </div>
-      <div className="return-link">
-        <Link to="/output">Return</Link>
-      </div>
+      <Link clasName="return-show" to="/output">Return</Link>
     </div>
   );
 
