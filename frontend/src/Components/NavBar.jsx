@@ -29,7 +29,7 @@ const NavBar = () => {
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About Us</Link></li>
-        <li><Link to="/mylearning">My Learning</Link></li>
+        <li><Link to="/mylearning">My Reports</Link></li>
       </ul>
       <button className='Login'><Link className='Logintext' to="/login">Log in</Link></button>
     </nav>

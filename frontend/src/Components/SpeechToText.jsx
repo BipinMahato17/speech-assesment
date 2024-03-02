@@ -29,6 +29,7 @@
 import React from 'react';
 import './SpeechToText.css'; // Import the CSS file for styling
 import { Link } from 'react-router-dom';
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -50,11 +51,16 @@ function SpeechToText() {
       console.log("Data fetched ...");
     }
   }, []);
+
+
+function SpeechToText() {
   return (
     <div className="speech-to-text-container">
       <div className="text-box">
         <h2>Your transcribed text is :</h2>
+
         <p>{transcribedText}</p>
+
       </div>
       <div className="return-link">
         <Link to="/output">Return</Link>
@@ -62,9 +68,8 @@ function SpeechToText() {
     </div>
   );
 }
-// function SpeechToText() {
-  
-// }
+
+
 
 export default SpeechToText;
 
