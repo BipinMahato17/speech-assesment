@@ -78,4 +78,3 @@ def delete_audio_file(request):
             recorder_instance.audio_file.delete()  # Delete the audio file from storage
             return Response("Audio file deleted successfully.", status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
