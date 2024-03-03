@@ -98,8 +98,11 @@ import biwasImg from '../assets/biwas.jpg';
 import ayushImg from '../assets/ayush.jpg';
 import { Link } from 'react-router-dom'; // Fixed import statement
 
+
+
 const About = () => {
   return (
+    <div>
     <div className='about-container'>
       {/* <div className='about-section'>
         <h2>About <span className="bold">US</span></h2>
@@ -136,7 +139,7 @@ const About = () => {
           <img src={ayushImg} alt="Ayush Khatri" className='round-image' />
           <div className="icon"></div>
           <div className='text-below-image'>
-            <p className='line1'>Ayush Khatri</p>
+            <p className='line1'>Aayush Khatri</p>
             <p className='line2'>PUR076BEI004</p>
           </div>
         </div>
@@ -174,6 +177,8 @@ const About = () => {
           Let's talk!
         </Link>
       </div> */}
+    </div>
+
     </div>
   );
 };

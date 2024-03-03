@@ -120,7 +120,7 @@ function Grammar() {
         <h2>Grammatically Corrected Text:</h2>
         <p>{renderCorrectedText()}</p>
       </div>
-      <Link clasName="return-show" to="/output">Return</Link>
+      <Link clasName="return-show" to="/user/output">Return</Link>
     </div>
   );
 }

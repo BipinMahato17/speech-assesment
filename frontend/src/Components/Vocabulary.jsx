@@ -100,7 +100,7 @@ function Vocabulary() {
       <hr />
       Our model predicts our vocabulary level is near B2 level.
       <br />
-      <Link to="/output" style={linkStyle}>Return</Link>
+      <Link to="/user/output" style={linkStyle}>Return</Link>
     </div>
   );
 }

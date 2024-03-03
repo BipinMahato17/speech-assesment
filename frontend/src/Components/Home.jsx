@@ -9,13 +9,13 @@ const Home = () => {
       <div className='left-side'>
         <h2 className='welcome-text'>Welcome to our app</h2>
         <p className='subtext'>"Grammar is the key to understanding. Expand your vocabulary, expand your world."</p>
-        <Link className='recording-link' to='/Recording'>
+        <Link className='recording-link' to='/Login'>
           Let's get started!
         </Link>
       </div>
-      <div className="right-side">
+      {/* <div className="right-side">
         <img src={Bipin} alt="bipin gandu" srcSet="" />
-      </div>
+      </div> */}
     </div>
   );
 };
