@@ -57,6 +57,55 @@ function Grammar() {
     }
   }, []);
 
+  // Function to compare the transcribed text and corrected sentence
+  // and apply different color to corrected words
+  const renderCorrectedText = () => {
+    if (!transcribedText || !correctedSentence) return null;
+
+    const transcribedWords = transcribedText.split(' ');
+    const correctedWords = correctedSentence.split(' ');
+    
+    const max_length = transcribedWords.length > correctedWords.length ? transcribedWords.length : correctedWords.length;
+    const highlighted = [];
+
+    for (let i = 0; i < max_length; i++) {
+      if (transcribedWords[i] !== correctedWords[i]) {
+        // Check if the difference is due to a missing word in the corrected sentence
+        const nextCorrectedWord = correctedWords[i + 1];
+        if (nextCorrectedWord && transcribedWords[i] === nextCorrectedWord) {
+          highlighted.push(correctedWords[i]);
+        }
+        // const prevTranscribedWord = transcribedWords[i-1];
+        // if (prevTranscribedWord && correctedWords[i] === prevTranscribedWord){
+        //   highlighted.pop(correctedWords[i]);
+        // }
+      }
+    }
+    console.log(highlighted);
+    return transcribedWords.map((word, index) => {
+      const corrected = word !== correctedWords[index];
+      return (
+        <span key={index} className={corrected ? 'corrected-word' : ''}>
+          {corrected ? correctedWords[index] : word}{' '}
+        </span>
+      );
+    }
+    );
+  };
+
+  // const highlightCorrectedWords = (transcribedText, correctedSentence) => {
+  //   const transcribedWords = transcribedText.split(' ');
+  //   const correctedWords = correctedSentence.split(' ');
+
+    
+  //   const highlighted = [];
+  //   for (let i = 0; i < transcribedWords.length; i++) {
+  //     if (transcribedWords[i] !== correctedWords[i]) {
+  //       highlighted.push(i);
+  //     }
+  //   }
+  //   setHighlightedWords(highlighted);
+  // };
 
   return (
     <div className="grammar-container">
@@ -69,7 +118,7 @@ function Grammar() {
 
       <div className="text-box">
         <h2>Grammatically Corrected Text:</h2>
-        <p>{correctedSentence}</p>
+        <p>{renderCorrectedText()}</p>
       </div>
       <Link clasName="return-show" to="/output">Return</Link>
     </div>

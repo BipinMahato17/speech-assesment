@@ -5,6 +5,7 @@ const MyLearning = () => {
     <div>
       <h2>My Learning</h2>
       <p>This is the MyLearning section.</p>
+      <table></table>
     </div>
   );
 };

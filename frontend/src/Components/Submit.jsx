@@ -21,13 +21,15 @@ import { CircularProgress } from '@mui/material';
 import './Submitting.css'; // Import the CSS file
 import Output from './Output'; // Import the Output component
 
+
 function Submit() {
   const [showOutput, setShowOutput] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowOutput(true);
-    }, 4000); // 4 seconds
+    }, 10000); // 4 seconds
 
     return () => clearTimeout(timer);
   }, []);

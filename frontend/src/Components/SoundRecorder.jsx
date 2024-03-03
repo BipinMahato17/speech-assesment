@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import abcde from '../assets/abcde.png';
-import SoundRecorder from './SoundRecorder.css';
+import './SoundRecorder.css';
 import { Link } from 'react-router-dom';
 import Array from './Array.jsx';
 import axios from 'axios';
+import Submit from './Submit';
+import Output from './Output';
 
 const Recorder = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -13,6 +15,7 @@ const Recorder = () => {
   const [mediaStream, setMediaStream] = useState(null);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const maxRecordingTime = 60; // Maximum recording time in seconds
+
 
   useEffect(() => {
     if (!navigator.mediaDevices) {
@@ -108,9 +111,7 @@ const Recorder = () => {
     const enteredFileName = prompt('Enter the file name:', '');
   
     if (enteredFileName) { // If the user entered a file name
-      // Set the file name state
-      // setFileName(enteredFileName);
-  
+      
       // Sending recorded audio to backend
       const formData = new FormData();
       formData.append('name', enteredFileName); // Append entered file name
@@ -119,13 +120,22 @@ const Recorder = () => {
         .then(response => {
           console.log('Audio uploaded successfully:', response);
           // Handle success
+          //check if response status is 201 created
+          if (response.status === 201){
+            
+            console.log('Audio Uploaded succuessfulyy');
+            
+          }
         })
         .catch(error => {
           console.error('Error uploading audio:', error);
           // Handle error
+          
+          
         });
     }
   };
+
   
 
   return (
@@ -137,6 +147,12 @@ const Recorder = () => {
         <div className='image'>
           <img src = {abcde} alt="Recorder" />
         </div>
+
+        {recordedChunks.length > 0 && (
+        <div>
+          <audio controls src={URL.createObjectURL(new Blob(recordedChunks, { type: 'audio/wav' }))}></audio>
+        </div>
+        )}
 
         <div className='buttons'>
           {!isRecording && !isPaused && (
@@ -152,25 +168,23 @@ const Recorder = () => {
             <button className="resume " onClick={resumeRecording}>Resume</button>
           )}
           {!isRecording && (
-          <button className="clear "onClick={clearRecording}>Clear</button>
+            <button className="clear "onClick={clearRecording}>Clear</button>
           )}   
-           {recordedChunks.length > 0 && (
-            // <button className="submit" onClick={submitRecording}>Submit</button>
-                <button className="submit" onClick={submitRecording}><Link className="hello" to='/Submit'>Submit</Link></button>
-                
-            )}
+          {recordedChunks.length > 0 && (
+          // <button className="submit" onClick={submitRecording}>Submit</button>
+            <button className="Submit" onClick={submitRecording}><Link className="hello" to='/Submit'>Submit</Link></button>
+              
+          )}
         </div>
 
       </div>
-      {recordedChunks.length > 0 && (
-        <div>
-          <audio controls src={URL.createObjectURL(new Blob(recordedChunks, { type: 'audio/wav' }))}></audio>
-        </div>
-      )}
+      
       <div>
         {isRecording && !isPaused && <p>Recording time: {timeElapsed} seconds</p>}
       </div>
+
     </div>
+
   );
 };
 
