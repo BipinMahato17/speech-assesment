@@ -12,14 +12,13 @@
 .questions{
     font-size: 30px;
     height: max-content;
-    margin: 20px auto;
+    margin: 10px auto;
     padding: 10px;
-    /* border: 1px solid red; */
     width: 75%;
 }
 
 .image{
-    margin: 45px 0;
+    margin: 30px 0;
     padding: 20px
 }
 .image img{
@@ -35,6 +34,7 @@
     margin: 5px auto;
     padding: 15px 0;
 }
+
 button{
     height: 50px;
     border: none;

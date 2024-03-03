@@ -20,5 +20,8 @@
   
   .text-box p {
     font-size: 16px;
+    color: rgb(98, 160, 5);
   }
-  
+  .corrected-word {
+    color: red; /* You can change the color as per your preference */
+  }
