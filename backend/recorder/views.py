@@ -10,7 +10,7 @@ import os
 from transformers import pipeline
 pipe = pipeline("automatic-speech-recognition", model="openai/whisper-small.en")
 
-GEC_pipe = pipeline("text2text-generation", model="kalobiralo/t5-grammar269k-model")
+GEC_pipe = pipeline("text2text-generation", model="kalobiralo/t5-grammar-model")
 
 # Create your views here.
 @api_view(['POST'])
@@ -43,6 +43,7 @@ def create_recorder(request):
         os.remove(temp_audio_path)
         corrected_sentence = grammar_correction(transcribe_result['text'])
         print(corrected_sentence)
+        print("Hello6")
         # Create a new Recorder instance and set the audio file
         serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file, 'transcribed_text':transcribed_text, 'corrected_sentence':corrected_sentence})
         if serializer.is_valid():
@@ -84,9 +85,30 @@ def delete_audio_file(request):
 
     
 def grammar_correction(transcribed_text):
-    print("entered grammar corection function/////////////////")
-    corrected_sentence = GEC_pipe(transcribed_text)
-    GEC_sentence=corrected_sentence[0]['generated_text']
-    # print(GEC_sentence)
+    sentencelist = []
+    correctlist = []
+    sentences = transcribed_text.split('. ')
+    for sentence in sentences:
+        if sentence!=sentences[-1]:
+            formatted_sentence = sentence.strip() + '.'
+            sentencelist.append(formatted_sentence)
+        else:
+            sentencelist.append(sentence)
+    print(sentencelist)
+    print("hello1")
+
+    for sentence in sentencelist:
+        corrected_sentence = GEC_pipe(sentence)
+        print(corrected_sentence)
+        print('hello3')
+        correctsentence=corrected_sentence[0]['generated_text']
+        correctlist.append(correctsentence)
+        print(correctsentence)
+        print("hello2")
+
+    print(correctlist)
+    print("hello4")
+    GEC_sentence = ' '.join(correctlist)
+    
     return GEC_sentence
 
