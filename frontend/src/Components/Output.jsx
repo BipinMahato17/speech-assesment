@@ -73,19 +73,19 @@ function Output() {
     <div className="output-container" style={containerStyle}>
       <div className="section">
         {/* Link to Speech to text component */}
-        <Link to="/speech-to-text" style={sectionStyle}>
+        <Link to="/user/speech-to-text" style={sectionStyle}>
           <h2>Speech to text</h2>
         </Link>
       </div>
       <div className="section">
         {/* Link to Grammar component */}
-        <Link to="/grammar" style={sectionStyle}>
+        <Link to="/user/grammar" style={sectionStyle}>
           <h2>Grammar</h2>
         </Link>
       </div>
       <div className="section">
         {/* Link to Vocabulary component */}
-        <Link to="/vocabulary" style={sectionStyle}>
+        <Link to="/user/vocabulary" style={sectionStyle}>
           <h2>Vocabulary</h2>
         </Link>
       </div>

@@ -6,6 +6,8 @@ import Array from './Array.jsx';
 import axios from 'axios';
 import Submit from './Submit';
 import Output from './Output';
+import Cookies from 'js-cookie';
+
 
 const Recorder = () => {
   const [isRecording, setIsRecording] = useState(false);
@@ -116,7 +118,11 @@ const Recorder = () => {
       const formData = new FormData();
       formData.append('name', enteredFileName); // Append entered file name
       formData.append('audio', new Blob(recordedChunks, { type: 'audio/wav' }));
-      axios.post('http://127.0.0.1:8000/recorder/', formData)
+      axios.post('http://127.0.0.1:8000/recorder/', formData,{
+        headers:{
+            'X-CSRFToken':Cookies.get('csrftoken'),
+        }
+    })
         .then(response => {
           console.log('Audio uploaded successfully:', response);
           // Handle success
@@ -172,7 +178,7 @@ const Recorder = () => {
           )}   
           {recordedChunks.length > 0 && (
           // <button className="submit" onClick={submitRecording}>Submit</button>
-            <button className="Submit" onClick={submitRecording}><Link className="hello" to='/Submit'>Submit</Link></button>
+            <button className="Submit" onClick={submitRecording}><Link className="hello" to='/user/Submit'>Submit</Link></button>
               
           )}
         </div>

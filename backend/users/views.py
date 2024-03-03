@@ -9,7 +9,7 @@ from rest_framework import status
 from .models import CustomUser
 from .serializers import UserLoginSerializer, UserRegisterSerializer, UserSerializer
 
-
+from django.contrib.auth import logout
 # Create your views here.
 @api_view(['POST'])
 def users(request):
@@ -58,3 +58,9 @@ def getUser(request):
                 return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({'error': 'Email parameter is missing'}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def  UserLogout(request):
+    if request.method == 'POST':
+        logout(request)
+        return Response(status=status.HTTP_200_OK)
