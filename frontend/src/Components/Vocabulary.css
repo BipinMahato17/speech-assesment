@@ -40,8 +40,9 @@ h4{
     border-radius: 5px;
     font-size: 20px;
     margin: 5px 30px;
+    border: 1px solid #00ff15;
     padding: 10px;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 20px 50px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 10px;
     height: auto;
     text-align: left;
   }
@@ -54,3 +55,47 @@ h4{
     background-color: #0fffb7;
     height: 100%;
 }
+
+
+.analysis{
+    width: 30%;
+    border: 1px solid #00ff15;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 10px;
+    border-radius: 5px;
+    padding:5px;
+};
+
+
+
+
+
+.transcribed-text-animation {
+    animation: slideInLeft 1s ease forwards; /* Apply the animation to the transcribed text box */
+  }
+  
+  .corrected-text-animation {
+    animation: slideInRight 1s ease forwards; /* Apply the animation to the grammatically corrected text box */
+  }
+  
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-100%); /* Start the text box outside of the viewport on the left */
+      opacity: 0; /* Initially hide the text box */
+    }
+    100% {
+      transform: translateX(0); /* Move the text box to its final position */
+      opacity: 1; /* Make the text box fully visible */
+    }
+  }
+  
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(100%); /* Start the text box outside of the viewport on the right */
+      opacity: 0; /* Initially hide the text box */
+    }
+    100% {
+      transform: translateX(0); /* Move the text box to its final position */
+      opacity: 1; /* Make the text box fully visible */
+    }
+  }
+  

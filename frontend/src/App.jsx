@@ -13,6 +13,7 @@ import SpeechToText from './Components/SpeechToText';
 import Grammar from './Components/Grammar';
 import Vocabulary from './Components/Vocabulary';
 import Logout from './Components/Logout';
+import FinalResult from './Components/FinalResult';
 
 import './App.css'; // Import the CSS file for styling
 import PrivateRoutes from './Components/PrivateRoutes';
@@ -54,6 +55,8 @@ function App() {
               <Route path="submit" element={<Submit />} />
               <Route path="recording" element={<SoundRecorder />} />
               <Route path="mylearning" element={<MyLearning />} />
+              <Route path="result" element={<FinalResult />} />
+              
               <Route path="speech-to-text" element={<SpeechToText />} />
              <Route path="grammar" element={<Grammar />} />
             </Route>

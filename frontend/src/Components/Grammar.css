@@ -1,4 +1,5 @@
-.grammar-container {
+/* 
+  .grammar-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,6 +12,49 @@
     padding: 20px;
     margin: 10px;
     max-width: 600px;
+    animation: slideIn 1s ease forwards; /* Apply the animation to the text box */
+    /* opacity: 0; Initially hide the text box */
+  /* }
+  
+  .text-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .text-box p {
+    font-size: 16px;
+    color: rgb(98, 160, 5);
+  }
+  
+  .corrected-word {
+    color: red;
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%); /* Start the text box outside of the viewport on the left */
+      /* opacity: 0; Initially hide the text box */
+    /* }
+    100% {
+      transform: translateX(0); /* Move the text box to its final position */
+      /* opacity: 1; Make the text box fully visible */
+    /* }
+  } */
+  .grammar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+  
+  .text-boxes {
+    border: 1px solid #00ff15;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    max-width: 600px;
+    
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 10px;/* Initially hide the text box */
   }
   
   .text-box h2 {
@@ -22,6 +66,38 @@
     font-size: 16px;
     color: rgb(98, 160, 5);
   }
+  
   .corrected-word {
-    color: red; /* You can change the color as per your preference */
+    color: red;
   }
+  
+  .transcribed-text-animation {
+    animation: slideInLeft 1s ease forwards; /* Apply the animation to the transcribed text box */
+  }
+  
+  .corrected-text-animation {
+    animation: slideInRight 1s ease forwards; /* Apply the animation to the grammatically corrected text box */
+  }
+  
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-100%); /* Start the text box outside of the viewport on the left */
+      opacity: 0; /* Initially hide the text box */
+    }
+    100% {
+      transform: translateX(0); /* Move the text box to its final position */
+      opacity: 1; /* Make the text box fully visible */
+    }
+  }
+  
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(100%); /* Start the text box outside of the viewport on the right */
+      opacity: 0; /* Initially hide the text box */
+    }
+    100% {
+      transform: translateX(0); /* Move the text box to its final position */
+      opacity: 1; /* Make the text box fully visible */
+    }
+  }
+  
