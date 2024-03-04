@@ -5,7 +5,8 @@ import { Link,useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './Vocabulary.css';
 import Grammar from './Grammar';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 function Vocabulary() {
   const location = useLocation();
   const data = location.state.data;
@@ -87,12 +88,6 @@ function Vocabulary() {
   };
 
 
-  const analysis = {
-    width: '30%',
-    boxShadow: 'rgba(0, 0, 0, 0.5) 0px 20px 50px',
-    borderRadius: '5px',
-    padding:'5px',
-};
 
   console.log("HERE FROM THE VOCABULARY")
     // Call calcWidth when the component mounts or when data changes
@@ -103,14 +98,17 @@ function Vocabulary() {
 
   return (
     <div style={containerStyle}>
+      <h1>You have total of {location.state.data["wordlist"].length} words.</h1>
       <Grammar/>
       <h2>Vocabulary Grading:</h2>
-      <h1>you have total of {location.state.data["wordlist"].length} words.</h1>
+      
       <div style={mainContent}>
-      <div className='textbox'>
+        
+      <div className='textbox transcribed-text-animation'>
         <p>{transcribedText}</p>
       </div>
-      <div style={analysis}>
+      
+      <div className='analysis corrected-text-animation'>
         <h4>English Words Predicted CEFR</h4>
         <div className='skill'>
           <p className='namelist'>A1</p>
@@ -157,13 +155,9 @@ function Vocabulary() {
       </div>
       </div>
       
-      <br />
-      <hr />
-      Our model predicts our vocabulary level is near B2 level.
-      <br />
-      <Link to="/user/output" style={linkStyle}>
+      {/* <Link to="/user/output" style={linkStyle}>
         Return
-      </Link>
+      </Link> */}
     </div>
   );
 }
