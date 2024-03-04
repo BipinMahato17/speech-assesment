@@ -2,6 +2,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { clearSession } from './authUtils';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -27,6 +28,7 @@ const Logout = () => {
             }
         }
       ).then(function(res) {
+        clearSession()
         console.log("cleared")
         navigate('/login');
   }

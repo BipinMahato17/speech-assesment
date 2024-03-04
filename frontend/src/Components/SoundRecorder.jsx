@@ -127,6 +127,7 @@ const Recorder = () => {
       formData.append('name', enteredFileName); // Append entered file name
       formData.append('audio', new Blob(recordedChunks, { type: 'audio/wav' }));
       axios.post('http://127.0.0.1:8000/recorder/', formData,{
+
         headers:{
             'X-CSRFToken':Cookies.get('csrftoken'),
         }
@@ -148,7 +149,7 @@ let data = {
     'extracted_idioms': response.data['extracted_idioms']
 }
             console.log('Audio Uploaded succuessfulyyyyy');
-            navigate('/Vocabulary', {state: {data: data}})
+            navigate('/user/vocabulary', {state: {data: data}})
             
           }
         })

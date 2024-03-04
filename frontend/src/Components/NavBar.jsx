@@ -2,6 +2,8 @@
 import React from 'react';
 import './NavBar.css'; // Import the CSS file for styling
 import { Link } from "react-router-dom";
+import { isLoggedIn } from './authUtils';
+// import Logout from './Logout';
 
 const NavBar = () => {
   return (
@@ -12,7 +14,10 @@ const NavBar = () => {
         <li><Link to="/about">About Us</Link></li>
         <li><Link to="/user/mylearning">My Reports</Link></li>
       </ul>
-      <button className='Login'><Link className='Logintext' to="/login">Log in</Link></button>
+      {console.log("is logged in", isLoggedIn())}
+      {isLoggedIn()? <button key={isLoggedIn()}className='Login'><Link className='Logintext' to="/user/logout">Log out</Link></button>:
+      <button key={isLoggedIn()} className='Login'><Link className='Logintext' to="/login">Log in</Link></button>
+  }
     </nav>
   );
 };
