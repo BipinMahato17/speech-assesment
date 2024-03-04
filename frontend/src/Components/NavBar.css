@@ -2,13 +2,10 @@
 nav{
   height: 48px;
   display: flex;
-  border: none;
-  background-color: #444040;
-
 }
 .appName{
-  color:#f6ffff;
-  font-family: cursive;
+  color:black;
+  font-family: sans-serif;
   font-size: 20px;
   /* width: 190px; */
   height: max-content;
@@ -20,42 +17,50 @@ nav{
 }
 .nav-links {
   list-style-type: none;
-
   width: 68%;
 }
 
 .nav-links li {
+  background-color: transparent;
   display: inline;
   /* border: 1px solid black;  */
   color: rgb(48, 46, 46);
   font-size: 20px;/* Change the display to inline */
-  padding: 17px 29px 10px 25px /* Add some space between list items */
+  padding: 17px 29px 1px 25px /* Add some space between list items */
+}
+.nav-links li:hover {
+  border-bottom:2px solid #4646CE;
+  display: inline;
+  /* border: 1px solid black;  */
+  color: rgb(48, 46, 46);
+  font-size: 20px;/* Change the display to inline */
+  padding: 17px 29px 1px 25px /* Add some space between list items */
 }
 
-.nav-links li:hover{
-  background-color: rgb(155, 154, 154);
+/*  *.nav-links li:hover{
+  background-color: rgba(132, 113, 173);
   color: white;
   /* display: cursor; */
-  cursor: pointer;
-}
+  /* cursor: pointer;
+}/ */
 .nav-links > li > a {
   text-decoration: none;
-  color: #ffffff;
+  color: black;
 }
-.Login{
+.LoginBtn{
   border: none;
   height: 38px;
-  background-color: #4c00b4;
   border-radius: 18px;
   width: 87px;
+  background-color: rgb(70, 70, 206);
   color: white;
-  font-family: cursive;
+  font-family: sans-serif;
   margin: auto;
 }
   
-.Login:hover{
-  background-color: rgb(106, 0, 0);
-  color: white;
+.LoginBtn:hover{
+  background-color: rgb(253, 241, 12);
+  color: rgb(0, 0, 0);
   /* display: cursor; */
   cursor: pointer;
 }
@@ -64,6 +69,14 @@ nav{
 
 color: white;
 text-decoration: none;
+font-size:16px ;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 
+}
+.Logintext:hover{
+  color:black;
+  text-decoration: none;
+font-size:16px ;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
