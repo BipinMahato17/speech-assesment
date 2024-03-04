@@ -16,7 +16,7 @@ const NavBar = () => {
       </ul>
       {console.log("is logged in", isLoggedIn())}
       {isLoggedIn()? <button key={isLoggedIn()}className='Login'><Link className='Logintext' to="/user/logout">Log out</Link></button>:
-      <button key={isLoggedIn()} className='Login'><Link className='Logintext' to="/login">Log in</Link></button>
+      <button key={isLoggedIn()} className='LoginBtn'><Link className='Logintext' to="/login">Log in</Link></button>
   }
     </nav>
   );

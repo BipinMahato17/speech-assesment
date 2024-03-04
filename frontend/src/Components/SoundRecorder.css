@@ -36,7 +36,7 @@
     padding: 15px 0;
 }
 
-button{
+.buttons button{
     height: 50px;
     border: none;
     background-color: rgb(70, 70, 206);
