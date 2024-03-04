@@ -125,14 +125,14 @@ font-size: 17px;
       width: 100%; /* Final width set to 100% */
     }
 }
-
+/* 
 .background-image {
     /* background-image: url('../assets/blue-background.png');
     /* background-size: cover;
     background-position: center;
     height: 100vh; */ 
 
-}  
+/* }   */ */
 
 .welcome-text {
     color:black;

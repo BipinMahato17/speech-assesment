@@ -13,3 +13,16 @@ color: black;
     text-decoration: none;
     text-align:left;
 }
+.grid{
+    color:black;
+}
+/* MyLearning.css */
+
+/* Style for the container of the data grid */
+/* .data-grid-container {
+    height: 400px;
+    width: 100%;
+    color: black; /* Set the background color to black */
+    /* padding: 20px; Optional: Add padding for better layout */
+  /* }
+   */ 
