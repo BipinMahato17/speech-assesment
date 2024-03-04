@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import abcde from '../assets/abcde.png';
+import abcde from '../assets/abcde11.png';
 import './SoundRecorder.css';
 import { Link, useNavigate } from 'react-router-dom';
 import Array from './Array.jsx';

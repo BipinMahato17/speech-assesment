@@ -23,19 +23,19 @@ import Output from './Output'; // Import the Output component
 
 
 function Submit() {
-  const [showOutput, setShowOutput] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [showOutput, setShowOutput] = useState(false);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowOutput(true);
-    }, 10000); // 4 seconds
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowOutput(true);
+  //   }, 10000); // 4 seconds
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   // Render nothing if showOutput is false
-  if (!showOutput) {
+  // if (!showOutput) {
     return (
       <div style={{ marginTop: '100px', textAlign: 'center' }}>
         <div>
@@ -44,10 +44,10 @@ function Submit() {
         </div>
       </div>
     );
-  }
+  // }
 
   // Render the Output component when showOutput is true
-  return <Output />;
+  // return <Output />;
 }
 
 export default Submit;
