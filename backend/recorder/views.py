@@ -1,3 +1,4 @@
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -5,9 +6,11 @@ from .serializers import RecorderSerializer, ListRecorderSerializer, DeleteAudio
 from .models import recorder
 import pandas as pd
 import tempfile
+import nltk
 import os
+nltk.download('punkt')
 
-df = pd.read_csv(r"C:/Users/USER/Desktop/major project/vscode/speech-assesment/backend/recorder/idiomsfinal.csv")
+df = pd.read_csv(r"D:\Majorproject\speech-assesment\backend\recorder\idiomsfinal.csv")
 # script_dir = os.getcwd()
 # file = 'idiomsfinal.csv'
 # df = pd.read_csv(os.path.normcase(os.path.join(script_dir, file)))
@@ -17,9 +20,11 @@ idiomlist = df['Idiom'].tolist()
 
 # Use a pipeline as a high-level helper
 from transformers import pipeline
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 pipe = pipeline("automatic-speech-recognition", model="openai/whisper-small.en")
 classifier = pipeline("text-classification", model="kalobiralo/bert_cefr_model2")
-GEC_pipe = pipeline("text2text-generation", model="kalobiralo/t5-grammar-model")
+tokenizer = AutoTokenizer.from_pretrained("kalobiralo/t5-grammar-model")
+GEC_pipe = AutoModelForSeq2SeqLM.from_pretrained("kalobiralo/t5-grammar-model")
 
 # Create your views here.
 @api_view(['POST'])
@@ -120,13 +125,16 @@ def grammar_correction(transcribed_text):
     print("hello1")
 
     for sentence in sentencelist:
-        corrected_sentence = GEC_pipe(sentence)
+        inputs =tokenizer(sentence, max_length=128, truncation=True, return_tensors="pt")
+        output = GEC_pipe.generate(**inputs, num_beams=8, do_sample=True, max_length=128)
+        decoded_output = tokenizer.batch_decode(output, skip_special_tokens=True)[0]
+        corrected_sentence = nltk.sent_tokenize(decoded_output.strip())[0]
         print(corrected_sentence)
         print('hello3')
-        correctsentence=corrected_sentence[0]['generated_text']
+        correctsentence=corrected_sentence
         correctlist.append(correctsentence)
         print(correctsentence)
-        print("hello2")
+        print(" ~")
 
     print(correctlist)
     print("hello4")
@@ -182,6 +190,3 @@ def extract_lists(text, idioms):
         C2_list.append(word)
 
     return wordlist,unique_wordlist,A1_list,A2_list,B1_list,B2_list,C1_list,C2_list,extracted_idioms
-
-
-
