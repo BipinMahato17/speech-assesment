@@ -118,7 +118,7 @@ function Grammar() {
 
       <div className="text-box">
         <h2>Grammatically Corrected Text:</h2>
-        <p>{renderCorrectedText()}</p>
+        <p>{correctedSentence}</p>
       </div>
       <Link clasName="return-show" to="/user/output">Return</Link>
     </div>
