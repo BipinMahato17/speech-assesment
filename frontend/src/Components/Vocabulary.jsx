@@ -1,67 +1,25 @@
 
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-
-// function Vocabulary() {
-//   const containerStyle = {
-//     textAlign: 'center', // Center align the bullets
-//     position: 'relative', // Positioning for the Link
-//   };
-
-//   const ulStyle = {
-//     display: 'inline-block', // Make the ul inline-block
-//     textAlign: 'left', // Align list items to the left
-//     paddingInlineStart: 0, // Remove default padding
-//     listStylePosition: 'inside', // Place bullets inside list items
-//   };
-
-//   const liStyle = {
-//     margin: '10px 0', // Add margin between list items
-//   };
-
-//   const linkStyle = {
-//     position: 'absolute', // Positioning for the Link
-//     bottom: '10px', // Distance from the bottom
-//     right: '10px', // Distance from the right
-//     textDecoration: 'none', // Remove default text decoration
-//     color: 'blue', // Link color
-//     fontSize: '16px', // Font size
-//   };
-
-//   return (
-//     <div style={containerStyle}>
-//       <h2>Vocabulary Grading:</h2>
-//       {/* Add your content here */}
-//       <p>
-//         <ul style={ulStyle}>
-//           <li style={liStyle}>You have 10 C1 level words.</li>
-//           <li style={liStyle}>You have 15 C2 level words.</li>
-//           <li style={liStyle}>You have 7 B2 level words.</li>
-//           <li style={liStyle}>You have 5 B1 level words.</li>
-//           <li style={liStyle}>You have 16 A2 level words.</li>
-//           <li style={liStyle}>You have 3 A1 level words.</li>
-//         </ul>
-//       </p>
-//       <br />
-//       <hr />
-//       Our model predicts our vocabulary level is near B2 level.
-//       <br />
-//       <Link to="/output" style={linkStyle}>Return </Link>
-//     </div>
-//   );
-// }
-
-// export default Vocabulary;
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link,useLocation } from 'react-router-dom';
 import axios from 'axios';
+import './Vocabulary.css';
+import Grammar from './Grammar';
 
 function Vocabulary() {
   const location = useLocation();
-  
+  const data = location.state.data;
   const [transcribedText, setTranscribedText] = useState('');
   const [correctedSentence, setCorrectedSentence] = useState('');
+  const [width, setWidth] = useState({
+    a1width: 0,
+    a2width: 0,
+    b1width: 0,
+    b2width: 0,
+    c1width: 0,
+    c2width: 0,
+  });
+
   useEffect(() => {
     const fetchData = async () =>{
       try{
@@ -80,22 +38,44 @@ function Vocabulary() {
     }
   }, []);
 
+  const calcWidth = (data) => {
+    const wordlist = data['unique_wordlist'].length;
+    const A1 = data['A1_list'].length;
+    const A2 = data['A2_list'].length;
+    const B1 = data['B1_list'].length;
+    const B2 = data['B2_list'].length;
+    const C1 = data['C1_list'].length;
+    const C2 = data['C2_list'].length;
+    
+    const a1width = Math.floor((A1/wordlist)*100);
+    const a2width = Math.floor((A2/wordlist)*100);
+    const b1width = Math.floor((B1/wordlist)*100);
+    const b2width = Math.floor((B2/wordlist)*100);
+    const c1width = Math.floor((C1/wordlist)*100);
+    const c2width = Math.floor((C2/wordlist)*100);
+
+    setWidth({
+      a1width,
+      a2width,
+      b1width,
+      b2width,
+      c1width,
+      c2width,
+    });
+  };
+
   const containerStyle = {
     textAlign: 'center', // Center align the bullets
     position: 'relative', // Positioning for the container
     minHeight: '100vh', // Ensure the container fills the viewport height
   };
 
-  const ulStyle = {
-    display: 'inline-block', // Make the ul inline-block
-    textAlign: 'left', // Align list items to the left
-    paddingInlineStart: 0, // Remove default padding
-    listStylePosition: 'inside', // Place bullets inside list items
-  };
+  const mainContent = {
+    display: 'flex', 
+    margin: '5px auto',
+    justifyContent: 'space-around',
+  }
 
-  const liStyle = {
-    margin: '10px 0', // Add margin between list items
-  };
 
   const linkStyle = {
     position: 'absolute', // Positioning for the link
@@ -106,39 +86,84 @@ function Vocabulary() {
     fontSize: '16px', // Font size
   };
 
-  const textbox = {
-    border: '1px solid #000000',
-    borderRadius: '5px', // Corrected property name to camelCase
-    padding: '20px',
-    margin: '10px',
-    maxWidth: '600px',
-    fontSize: '16px',
-    color: 'rgb(98, 160, 5)', // Corrected property name to camelCase
+
+  const analysis = {
+    width: '30%',
+    boxShadow: 'rgba(0, 0, 0, 0.5) 0px 20px 50px',
+    borderRadius: '5px',
+    padding:'5px',
 };
 
   console.log("HERE FROM THE VOCABULARY")
+    // Call calcWidth when the component mounts or when data changes
+    React.useEffect(() => {
+      calcWidth(data);
+    }, [data]);
 
 
   return (
     <div style={containerStyle}>
+      <Grammar/>
       <h2>Vocabulary Grading:</h2>
-      <div style={textbox}><p>{transcribedText}</p></div>
-      <h1>you have total of {location.state.data['wordlist'].length} words.</h1>
-      <p>
-        <ul style={ulStyle}>
-          <li style={liStyle}>You have {location.state.data['C1_list'].length} C1 level words.</li>
-          <li style={liStyle}>You have {location.state.data['C2_list'].length} C2 level words.</li>
-          <li style={liStyle}>You have {location.state.data['B2_list'].length} B2 level words.</li>
-          <li style={liStyle}>You have {location.state.data['B1_list'].length} B1 level words.</li>
-          <li style={liStyle}>You have {location.state.data['A2_list'].length} A2 level words.</li>
-          <li style={liStyle}>You have {location.state.data['A1_list'].length} A1 level words.</li>
-        </ul>
-      </p>
+      <h1>you have total of {location.state.data["wordlist"].length} words.</h1>
+      <div style={mainContent}>
+      <div className='textbox'>
+        <p>{transcribedText}</p>
+      </div>
+      <div style={analysis}>
+        <h4>English Words Predicted CEFR</h4>
+        <div className='skill'>
+          <p className='namelist'>A1</p>
+          <p>{width.a1width}%</p>
+          <div className='skillbar'>
+            <div className='skill-level' style={{width: `${width.a1width}%`}}></div>
+          </div>
+        </div>
+        <div className='skill'>
+        <p className='namelist'>A2</p>
+          <p>{width.a2width}%</p>
+          <div className='skillbar'>
+            <div className='skill-level' style={{width: `${width.a2width}%`}}></div>
+          </div>
+        </div>
+        <div className='skill'>
+        <p className='namelist'>B1</p>
+          <p>{width.b1width}%</p>
+          <div className='skillbar'>
+            <div className='skill-level' style={{width: `${width.b1width}%`}}></div>
+          </div>
+        </div>
+        <div className='skill'>
+        <p className='namelist'>B2</p>
+          <p>{width.b2width}%</p>
+          <div className='skillbar'>
+            <div className='skill-level' style={{width: `${width.b2width}%`}}></div>
+          </div>
+        </div>
+        <div className='skill'>
+        <p className='namelist'>C1</p>
+          <p>{width.c1width}%</p>
+          <div className='skillbar'>
+            <div className='skill-level' style={{width: `${width.c1width}%`}}></div>
+          </div>
+        </div>
+        <div className='skill'>
+        <p className='namelist'>C2</p>
+          <p className='namelistper'>{width.c2width}%</p>
+          <div className='skillbar'>
+            <div className='skill-level' style={{width: `${width.c2width}%`}}></div>
+          </div>
+        </div>
+      </div>
+      </div>
+      
       <br />
       <hr />
       Our model predicts our vocabulary level is near B2 level.
       <br />
-      <Link to="/user/output" style={linkStyle}>Return</Link>
+      <Link to="/user/output" style={linkStyle}>
+        Return
+      </Link>
     </div>
   );
 }

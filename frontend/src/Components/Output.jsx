@@ -47,6 +47,7 @@
 // export default Output;
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Grammar from './Grammar';
 
 function Output() {
   const containerStyle = {
@@ -72,23 +73,19 @@ function Output() {
   return (
     <div className="output-container" style={containerStyle}>
       <div className="section">
-        {/* Link to Speech to text component */}
+        {/* Link to Speech to text component
         <Link to="/user/speech-to-text" style={sectionStyle}>
           <h2>Speech to text</h2>
-        </Link>
+        </Link> */}
+        <Grammar/>
       </div>
-      <div className="section">
-        {/* Link to Grammar component */}
-        <Link to="/user/grammar" style={sectionStyle}>
-          <h2>Grammar</h2>
-        </Link>
-      </div>
-      <div className="section">
+      
+      {/* <div className="section">
         {/* Link to Vocabulary component */}
-        <Link to="/user/vocabulary" style={sectionStyle}>
+        {/* <Link to="/user/vocabulary" style={sectionStyle}>
           <h2>Vocabulary</h2>
         </Link>
-      </div>
+      // </div> */} 
     </div>
   );
 }
