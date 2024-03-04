@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import abcde from '../assets/abcde.png';
 import './SoundRecorder.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Array from './Array.jsx';
 import axios from 'axios';
+import Vocabulary from './Vocabulary'
 import Submit from './Submit';
 import Output from './Output';
 import Cookies from 'js-cookie';
@@ -16,7 +17,10 @@ const Recorder = () => {
   const [recorder, setRecorder] = useState(null);
   const [mediaStream, setMediaStream] = useState(null);
   const [timeElapsed, setTimeElapsed] = useState(0);
+  // const [responseData, setResponseData] = useState(null);
+
   const maxRecordingTime = 60; // Maximum recording time in seconds
+  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -57,6 +61,10 @@ const Recorder = () => {
       stopRecording();
     }
   }, [timeElapsed, maxRecordingTime]);
+
+  // useEffect(()=>{
+  //   console.log("responseData Updated:",responseData);
+  // }, [responseData]);
 
   const startRecording = () => {
     const chunks = [];
@@ -119,34 +127,45 @@ const Recorder = () => {
       formData.append('name', enteredFileName); // Append entered file name
       formData.append('audio', new Blob(recordedChunks, { type: 'audio/wav' }));
       axios.post('http://127.0.0.1:8000/recorder/', formData,{
+
         headers:{
             'X-CSRFToken':Cookies.get('csrftoken'),
         }
     })
         .then(response => {
           console.log('Audio uploaded successfully:', response);
-          // Handle success
-          //check if response status is 201 created
           if (response.status === 201){
-            
-            console.log('Audio Uploaded succuessfulyy');
+            console.log(response.data['wordlist']);
+            //Your dictionary data
+let data = {
+    'wordlist': response.data['wordlist'],
+    'unique_wordlist': response.data['unique_wordlist'],
+    'A1_list': response.data['A1_list'],
+    'A2_list': response.data['A2_list'],
+    'B1_list': response.data['B1_list'],
+    'B2_list': response.data['B2_list'],
+    'C1_list': response.data['C1_list'],
+    'C2_list': response.data['C2_list'],
+    'extracted_idioms': response.data['extracted_idioms']
+}
+            console.log('Audio Uploaded succuessfulyyyyy');
+            navigate('/user/vocabulary', {state: {data: data}})
             
           }
         })
         .catch(error => {
           console.error('Error uploading audio:', error);
-          // Handle error
-          
-          
         });
-    }
-  };
-
-  
-
-  return (
-    <div className='main'>
+        // console.log("analyzer" + responseData);
+      }
+    };
+    
+    
+    
+    return (
+      <div className='main'>
       <div className='recorder'>
+      
 
         <div className="questions"><Array /> </div>
 
@@ -188,6 +207,9 @@ const Recorder = () => {
       <div>
         {isRecording && !isPaused && <p>Recording time: {timeElapsed} seconds</p>}
       </div>
+      {/* <div>
+            {responseData && <Vocabulary data={data} />}
+      </div> */}
 
     </div>
 

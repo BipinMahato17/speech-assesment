@@ -3,13 +3,22 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import RecorderSerializer, ListRecorderSerializer, DeleteAudioFileSerializer
 from .models import recorder
-
+import pandas as pd
 import tempfile
 import os
+
+df = pd.read_csv(r"C:/Users/USER/Desktop/major project/vscode/speech-assesment/backend/recorder/idiomsfinal.csv")
+# script_dir = os.getcwd()
+# file = 'idiomsfinal.csv'
+# df = pd.read_csv(os.path.normcase(os.path.join(script_dir, file)))
+df['Idiom'] = df['Idiom'].str.lower()
+df = df.drop_duplicates(subset=['Idiom'])
+idiomlist = df['Idiom'].tolist()
+
 # Use a pipeline as a high-level helper
 from transformers import pipeline
 pipe = pipeline("automatic-speech-recognition", model="openai/whisper-small.en")
-
+classifier = pipeline("text-classification", model="kalobiralo/bert_cefr_model2")
 GEC_pipe = pipeline("text2text-generation", model="kalobiralo/t5-grammar-model")
 
 # Create your views here.
@@ -43,12 +52,25 @@ def create_recorder(request):
         os.remove(temp_audio_path)
         corrected_sentence = grammar_correction(transcribe_result['text'])
         print(corrected_sentence)
-        print("Hello6")
+        wordlist,unique_wordlist,A1_list,A2_list,B1_list,B2_list,C1_list,C2_list,extracted_idioms = extract_lists(transcribe_result['text'], idiomlist)
+        
+        data_to_send = {
+            'wordlist': wordlist,
+            'unique_wordlist': list(unique_wordlist),
+            'A1_list': A1_list,
+            'A2_list': A2_list,
+            'B1_list': B1_list,
+            'B2_list': B2_list,
+            'C1_list': C1_list,
+            'C2_list': C2_list,
+            'extracted_idioms': extracted_idioms
+        }
+        print(data_to_send)
         # Create a new Recorder instance and set the audio file
         serializer = RecorderSerializer(data={'name': name,'audio_file': audio_file, 'transcribed_text':transcribed_text, 'corrected_sentence':corrected_sentence})
         if serializer.is_valid():
             serializer.save() 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({**serializer.data,**data_to_send}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -111,5 +133,55 @@ def grammar_correction(transcribed_text):
     GEC_sentence = ' '.join(correctlist)
     
     return GEC_sentence
+
+
+# Model for vocabulary evaluation
+def extract_lists(text, idioms):
+    extracted_idioms = []
+    cleaned_text = text.lower()
+
+    for idiom in idioms:
+      if idiom in cleaned_text:
+        extracted_idioms.append(idiom)
+        cleaned_text = cleaned_text.replace(idiom, '')
+
+    # initializing punctuations string
+    punc = '''!()-[]{};:"\,<>./?@#$%^&*_~'''
+
+    # Removing punctuations in string
+    # Using loop + punctuation string
+    for ele in cleaned_text:
+      if ele in punc:
+        cleaned_text = cleaned_text.replace(ele, "")
+
+    wordlist = cleaned_text.split()
+    unique_wordlist = set(wordlist)
+
+    A1_list=[]
+    A2_list=[]
+    B1_list=[]
+    B2_list=[]
+    C1_list=[]
+    C2_list=[]
+
+    for word in unique_wordlist:
+      predictions = classifier(word)
+      cefr = predictions[0]['label']
+
+      if cefr == 'A1':
+        A1_list.append(word)
+      elif cefr == 'A2':
+        A2_list.append(word)
+      elif cefr == 'B1':
+        B1_list.append(word)
+      elif cefr == 'B2':
+        B2_list.append(word)
+      elif cefr == 'C1':
+        C1_list.append(word)
+      else:
+        C2_list.append(word)
+
+    return wordlist,unique_wordlist,A1_list,A2_list,B1_list,B2_list,C1_list,C2_list,extracted_idioms
+
 
 
