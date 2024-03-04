@@ -1,70 +1,135 @@
-.bold {
+/* .about-container {
+    margin: 20px;
+  }
+  
+  .about-section {
+    margin-top: 20px;
+  }
+  
+  .sub-header {
+    margin-top: 20px;
+  }
+  
+  .sub-header-text {
     font-weight: bold;
-}
-
-.regular {
-    font-weight: normal; 
-}
-
-.sub-header {
-    border-bottom: 2px solid #333; 
-    width: fit-content; 
-}
-
-.sub-header-text {
-    display: block;
-    font-weight: bold;
-    font-size: 14px;
-    color: #666; 
-    padding-top: 5px; 
-}
-
-.image-gallery {
-    display: flex;
-    justify-content: space-between;
-}
-
-.image-text-container {
-    position:relative;
-    width: 300px;
-    height: 300px;
-    overflow: hidden;
-}
-
-.round-image {
-    display: block;
-    width: 20%;
-    height: 20%;
-    border-radius: 50%;
-}
-
-.icon {
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    /* background-color: rgba(0,0,0, 0.5); */
-    /* background-image: url('icon.png'); */
-    /* background-size: cover; */
-    background-position: center;
-    /* z-index: 1; */
-}
-
-.line1 {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.line2 {
+  }
+  
+  .regular {
     font-weight: normal;
-    font-size: 15px;
-}
-
-.full-width-container {
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  .round-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-bottom: 5px;
+  }
+  
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .image-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .text-below-image {
+    text-align: center;
+  }
+  
+  .full-width-container {
     width: 100%;
-    background-color: #c3c3c3;
-    padding: 20px;
-}
+    margin-top: 20px;
+  }
+   */
 
+   .about-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Assuming your background image is in the assets folder */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  
+  .about-section {
+    margin-top: 20px;
+  }
+  
+  .sub-header {
+    margin-top: 20px;
+  }
+  
+  .sub-header-text {
+    font-weight: bold;
+    text-align:left;
+    font-size: 40px;
+  }
+  
+  .regular {
+    font-weight: normal;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  .round-image {
+    width: 145px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-bottom: 5px;
+  }
+  
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 64px;
+  }
+  
+  .image-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .text-below-image {
+    text-align: center;
+  }
+  
+  .full-width-container {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .a{
+
+    text-align: center;
+    margin: 28px;
+    width: 61%;
+  }
+  .line1{
+    font-weight: bold;
+  }
+
+  .rec{
+
+    text-decoration: none;
+    text-align: right;
+  }
