@@ -56,6 +56,7 @@ nav{
   color: rgb(255,255,255);
   font-family: cursive;
   margin: auto;
+  text-decoration: none;
 }
   
 .Login:hover{
