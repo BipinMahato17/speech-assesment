@@ -1,9 +1,10 @@
 .App {
     text-align: center;
-    background-image: url('D:\speech-assesment\frontend\src\assets\blue-background.png');
+    background-image: url('./assets/blue-background.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
+    overflow-y: scroll;
   }
   
   .sections-container {

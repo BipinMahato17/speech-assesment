@@ -20,10 +20,14 @@ idiomlist = df['Idiom'].tolist()
 # Use a pipeline as a high-level helper
 from transformers import pipeline
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+local_model_path = "./recorder/t5-grammar-model"
+GEC_pipe = AutoModelForSeq2SeqLM.from_pretrained(local_model_path)
+tokenizer = AutoTokenizer.from_pretrained(local_model_path)
 pipe = pipeline("automatic-speech-recognition", model="openai/whisper-small.en")
 classifier = pipeline("text-classification", model="kalobiralo/bert_cefr_model2")
-tokenizer = AutoTokenizer.from_pretrained("kalobiralo/t5-grammar-model")
-GEC_pipe = AutoModelForSeq2SeqLM.from_pretrained("kalobiralo/t5-grammar-model")
+# pipe = pipeline("text2text-generation",model=GEC_pipe, tokenizer=tokenizer)
+
+
 
 # Create your views here.
 @api_view(['POST'])

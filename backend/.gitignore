@@ -20,3 +20,6 @@ media/
 
 # Ignore virtual environment
 venv/
+
+#Ignore t5 grammar model
+./recorder/t5-grammar-model/

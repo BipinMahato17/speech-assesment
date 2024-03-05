@@ -7,6 +7,7 @@ import './Vocabulary.css';
 import Grammar from './Grammar';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
 function Vocabulary() {
   const location = useLocation();
   const data = location.state.data;
@@ -20,6 +21,8 @@ function Vocabulary() {
     c1width: 0,
     c2width: 0,
   });
+
+  
 
   useEffect(() => {
     const fetchData = async () =>{
@@ -65,6 +68,50 @@ function Vocabulary() {
     });
   };
 
+  const colors = ['#66ff66','#99ff33','#ffff33','#ffb366','#ff5c33','#ff1a1a'];
+  const getWordColor = (word, data) => {
+    const wordlists = [
+      data['A1_list'],
+      data['A2_list'],
+      data['B1_list'],
+      data['B2_list'],
+      data['C1_list'],
+      data['C2_list']
+    ];
+
+    console.log("we are here",wordlists[1]);
+    for (let i = 0; i<data['wordlist'].length; i++){
+      console.log("we are inside the loop", wordlists[i], word)
+      console.log(word)
+
+
+      if (wordlists[i].includes(word.toLowerCase())){
+        console.log("from inside if statement",wordlists[i]);
+        return colors[i % colors.length];
+      }
+    }
+    return ' ';
+  }
+  
+  const renderColoredText = (text) => {
+    console.log(text)
+    const text1 = text.replace(/[!"#$%&()*+,\-./:;<=>?@[\\\]^_`{|}~]/g, '');
+    console.log("chalena",text1)
+    const words = text1.split(' ');
+    const pword = text.split(' ');
+    console.log("from render colored text",words);
+
+    return words.map((word, index) => {
+      console.log(data);
+      console.log("hello",word);
+      const color = getWordColor(word, data);
+      console.log(color);
+      return <span key={index} id={index} style={{ color }}>{pword[index] +' '}</span>;
+
+    });
+
+  };
+
   const containerStyle = {
     textAlign: 'center', // Center align the bullets
     position: 'relative', // Positioning for the container
@@ -103,10 +150,10 @@ function Vocabulary() {
       <h2>Vocabulary Grading:</h2>
       
       <div style={mainContent}>
+      {transcribedText && (<div className='textbox transcribed-text-animation'><p>{renderColoredText(transcribedText)}</p></div>
+)}
+   
         
-      <div className='textbox transcribed-text-animation'>
-        <p>{transcribedText}</p>
-      </div>
       
       <div className='analysis corrected-text-animation'>
         <h4>English Words Predicted CEFR</h4>
@@ -114,42 +161,42 @@ function Vocabulary() {
           <p className='namelist'>A1</p>
           <p>{width.a1width}%</p>
           <div className='skillbar'>
-            <div className='skill-level' style={{width: `${width.a1width}%`}}></div>
+            <div className='skill-level' style={{width: `${width.a1width}%`, backgroundColor: '#66ff66', borderRadius: '4px'}}></div>
           </div>
         </div>
         <div className='skill'>
         <p className='namelist'>A2</p>
           <p>{width.a2width}%</p>
           <div className='skillbar'>
-            <div className='skill-level' style={{width: `${width.a2width}%`}}></div>
+            <div className='skill-level' style={{width: `${width.a2width}%`, backgroundColor: '#99ff33', borderRadius: '4px'}}></div>
           </div>
         </div>
         <div className='skill'>
         <p className='namelist'>B1</p>
           <p>{width.b1width}%</p>
           <div className='skillbar'>
-            <div className='skill-level' style={{width: `${width.b1width}%`}}></div>
+            <div className='skill-level' style={{width: `${width.b1width}%`, backgroundColor: '#ffff33', borderRadius: '4px'}}></div>
           </div>
         </div>
         <div className='skill'>
         <p className='namelist'>B2</p>
           <p>{width.b2width}%</p>
           <div className='skillbar'>
-            <div className='skill-level' style={{width: `${width.b2width}%`}}></div>
+            <div className='skill-level' style={{width: `${width.b2width}%`, backgroundColor: '#ffb366', borderRadius: '4px'}}></div>
           </div>
         </div>
         <div className='skill'>
         <p className='namelist'>C1</p>
           <p>{width.c1width}%</p>
           <div className='skillbar'>
-            <div className='skill-level' style={{width: `${width.c1width}%`}}></div>
+            <div className='skill-level' style={{width: `${width.c1width}%`, backgroundColor: '#ff5c33', borderRadius: '4px'}}></div>
           </div>
         </div>
         <div className='skill'>
         <p className='namelist'>C2</p>
           <p className='namelistper'>{width.c2width}%</p>
           <div className='skillbar'>
-            <div className='skill-level' style={{width: `${width.c2width}%`}}></div>
+            <div className='skill-level' style={{width: `${width.c2width}%`, backgroundColor: '#ff1a1a', borderRadius: '4px'}}></div>
           </div>
         </div>
       </div>
