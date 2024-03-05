@@ -25,7 +25,13 @@ import Output from './Output'; // Import the Output component
 function Submit() {
   // const [showOutput, setShowOutput] = useState(false);
   // const [loading, setLoading] = useState(true);
+  // const [showOutput, setShowOutput] = useState(false);
+  // const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowOutput(true);
+  //   }, 10000); // 4 seconds
   // useEffect(() => {
   //   const timer = setTimeout(() => {
   //     setShowOutput(true);
@@ -33,17 +39,21 @@ function Submit() {
 
   //   return () => clearTimeout(timer);
   // }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   // Render nothing if showOutput is false
   // if (!showOutput) {
+  // if (!showOutput) {
     return (
-      <div style={{ marginTop: '100px', textAlign: 'center' }}>
+      <div style={{ marginTop: '100px', textAlign: 'center', color:'white'}}>
         <div>
           <CircularProgress size={75} /> {/* Loader spinner */}
-          <h1 className="text">Please wait, analyzing your results<span className="dot-animation"></span></h1>
+          <h1 className="text" style={{color: 'white'}}>Please wait, analyzing your results<span className="dot-animation"></span></h1>
         </div>
       </div>
     );
+  // }
   // }
 
   // // Render the Output component when showOutput is true

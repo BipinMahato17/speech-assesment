@@ -240,7 +240,7 @@ const Login = () => {
             }
         })
         .then(response => {
-            const userData = response.data;
+            const userData = {"email":loginData.email};
 
         // Set session data upon successful login
           setSession(userData);

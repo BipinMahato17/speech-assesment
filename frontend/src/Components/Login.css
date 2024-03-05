@@ -5,6 +5,7 @@
     margin-top: 50px;
     width: 600px;
     box-shadow: 1px 2px 10px;
+    color: white;
 }
 
 .header {
@@ -16,8 +17,8 @@
     margin-top: 30px;
 }
 
-.text{
-    color:#3c009d;
+.header .text{
+    color: white;
     font-size: 32px;
     font-weight: 700;
 }
@@ -89,12 +90,12 @@
 .already-account, .forgot-password{
     /* padding-left: 62px; */
     margin-top: 27px;
-    color: #797979;
+    color: #dbdbdb;
     font-size: 18px;
 }
 
 .already-account span, .forgot-password span{
-    color: #4c00b4;
+    color: #00d66b;
     cursor: pointer;
 }
 

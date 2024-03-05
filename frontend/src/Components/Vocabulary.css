@@ -45,6 +45,7 @@ h4{
     box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 10px;
     height: auto;
     text-align: left;
+    background-color: black;
   }
 
 .textbox p{
@@ -64,9 +65,6 @@ h4{
     border-radius: 5px;
     padding:5px;
 };
-
-
-
 
 
 .transcribed-text-animation {
@@ -99,3 +97,18 @@ h4{
     }
   }
   
+
+  .vocab{
+    width: 95%;
+    margin: 20px auto;
+    height: 100px;
+    border: 1px solid green;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .vocab div{
+    border: 1px solid white;
+    width: 33%;
+    
+  }

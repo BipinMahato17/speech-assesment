@@ -98,21 +98,28 @@
 // export default Grammar;
 import React from 'react';
 import './Grammar.css'; // Import the CSS file for styling
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Grammar() {
-
+  const location = useLocation();
+  const pathname = location.pathname;
+  console.log(pathname)
+  const parts = pathname.split('/');
+  const numberPart = parts[parts.length - 1];
+// console.log(numberPart)
+// Parse the number part as an integer
+const vocabularyId = parseInt(numberPart);
   const [transcribedText, setTranscribedText] = useState('');
   const [correctedSentence, setCorrectedSentence] = useState('');
   useEffect(() => {
     const fetchData = async () =>{
       try{
-        const response = await axios.get('http://127.0.0.1:8000/recorder/list-recorders/');
-        console.log(response.data[0]['transcribed_text']);
-        setTranscribedText(response.data[0]['transcribed_text']);
-        setCorrectedSentence(response.data[0]['corrected_sentence']);
+        const response = await axios.get('http://127.0.0.1:8000/recorder/list-recorders/'+vocabularyId);
+        console.log(response.data['transcribed_text']);
+        setTranscribedText(response.data['transcribed_text']);
+        setCorrectedSentence(response.data['corrected_sentence']);
       }
       catch (error){
         console.error('Error fetching data:', error);
