@@ -47,36 +47,33 @@ nav{
   text-decoration: none;
   color: black;
 }
-.LoginBtn{
+.Login{
   border: none;
   height: 38px;
+  background-color:black;
   border-radius: 18px;
   width: 87px;
-  background-color: rgb(70, 70, 206);
-  color: white;
-  font-family: sans-serif;
+  color: rgb(255,255,255);
+  font-family: cursive;
   margin: auto;
+  text-decoration: none;
 }
   
-.LoginBtn:hover{
-  background-color: rgb(253, 241, 12);
-  color: rgb(0, 0, 0);
+.Login:hover{
+  background-color: purple;
+  color: orange;
   /* display: cursor; */
   cursor: pointer;
 }
 
 .Logintext{
 
-color: white;
+color: rgb(255, 255, 255);
 text-decoration: none;
-font-size:16px ;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 
 }
 .Logintext:hover{
-  color:black;
-  text-decoration: none;
-font-size:16px ;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+  color:orange;
 }

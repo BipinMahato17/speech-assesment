@@ -9,7 +9,7 @@ import nltk
 import os
 nltk.download('punkt')
 
-df = pd.read_csv(r"C:/Users/USER/Desktop/major project/vscode/speech-assesment/backend/recorder/idiomsfinal.csv")
+df = pd.read_csv(r"D:/Majorproject/speech-assesment/backend/recorder/idiomsfinal.csv")
 # script_dir = os.getcwd()
 # file = 'idiomsfinal.csv'
 # df = pd.read_csv(os.path.normcase(os.path.join(script_dir, file)))

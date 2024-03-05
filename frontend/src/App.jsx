@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import ReactDOM from 'react-dom';
+
 import Home from './Components/Home';
 import About from './Components/About';
 import MyLearning from './Components/MyLearning';
@@ -20,11 +22,12 @@ import PrivateRoutes from './Components/PrivateRoutes';
 
 function App() {
   const [redirectToOutput, setRedirectToOutput] = useState(false);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     const timer = setTimeout(() => {
       setRedirectToOutput(true);
     }, 4000); // 4 seconds
+   
 
     return () => clearTimeout(timer);
   }, []);
@@ -36,19 +39,22 @@ function App() {
         <div className="section-container">
           <Routes>
             <Route path="/" element={<Home />} />
+            {/* <Route path="/about" element={<About />} />
+          
+            <Route path="/login" element={<LogIn />} /> */}
+            <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
             <Route path="/about" element={<About />} />
-          
-            <Route path="/login" element={<LogIn />} />
-          
-         
+            <Route path="/login" element={<LogIn setIsLoggedIn={setIsLoggedIn} />} />
+{/*           
+            <Route path="/login" element={<LogIn setIsLoggedIn={setIsLoggedIn} />} /> */}
           
             
-
 
           
 
           <Route path="/user" element={<PrivateRoutes />} >
-
+          
+          {/* <Route path="/login" element={<LogIn setIsLoggedIn={setIsLoggedIn} />} /> */}
               <Route path="vocabulary" element={<Vocabulary />} />
               <Route path="logout" element={<Logout />} />
               <Route path="output" element={<Output />} />

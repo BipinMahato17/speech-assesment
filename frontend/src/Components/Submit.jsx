@@ -46,8 +46,8 @@ function Submit() {
     );
   // }
 
-  // // Render the Output component when showOutput is true
-  // return <Output />;
+  // Render the Output component when showOutput is true
+  return <Output />;
 }
 
 export default Submit;
