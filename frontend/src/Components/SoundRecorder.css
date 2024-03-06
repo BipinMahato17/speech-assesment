@@ -2,6 +2,7 @@
     /* border: 1px solid black; */
     margin-top: 10px;
     padding: 0;
+    color: white;
     /* background-image: url('../assets/hlo.jpg'); */
 }
 
@@ -28,7 +29,7 @@
 }
 
 .buttons{
-    border-top: 2px solid black;
+    border-top: 2px solid rgb(255, 255, 255);
     position: fixed;
     bottom: 0;
     width: 100%;

@@ -1,79 +1,65 @@
 /* NavBar.css */
 nav{
-  height: 48px;
+  height: 60px;
   display: flex;
+  color: white;
+
 }
 .appName{
-  color:black;
+  font-weight: bold;
   font-family: sans-serif;
   font-size: 20px;
-  /* width: 190px; */
   height: max-content;
   margin: 10px;
   width: 12%;
   border: none;
-
+  padding-top: 8px;
 
 }
 .nav-links {
   list-style-type: none;
-  width: 68%;
+  width: 60%;
 }
 
 .nav-links li {
   background-color: transparent;
   display: inline;
-  /* border: 1px solid black;  */
-  color: rgb(48, 46, 46);
+  color: white;
   font-size: 20px;/* Change the display to inline */
-  padding: 17px 29px 1px 25px /* Add some space between list items */
-}
-.nav-links li:hover {
-  border-bottom:2px solid #4646CE;
-  display: inline;
-  /* border: 1px solid black;  */
-  color: rgb(48, 46, 46);
-  font-size: 20px;/* Change the display to inline */
-  padding: 17px 29px 1px 25px /* Add some space between list items */
+  padding: 17px 29px 20px 25px /* Add some space between list items */
 }
 
-/*  *.nav-links li:hover{
-  background-color: rgba(132, 113, 173);
-  color: white;
-  /* display: cursor; */
-  /* cursor: pointer;
-}/ */
+
 .nav-links > li > a {
   text-decoration: none;
-  color: black;
+    padding: 15px 10px 16px;
+    
+    color: white;
+    /* cursor: pointer; */
+ 
 }
+
+.links:hover{
+  border-bottom: 2px solid rgb(255, 255, 255);
+  cursor: pointer;
+}
+
 .Login{
   border: none;
-  height: 38px;
-  background-color:black;
-  border-radius: 18px;
-  width: 87px;
-  color: rgb(255,255,255);
-  font-family: cursive;
+  background-color: transparent;
   margin: auto;
   text-decoration: none;
 }
   
-.Login:hover{
-  background-color: purple;
-  color: orange;
-  /* display: cursor; */
+.Logintext:hover{
+  border: 2px solid rgb(0, 255, 0);
   cursor: pointer;
 }
 
 .Logintext{
-
-color: rgb(255, 255, 255);
-text-decoration: none;
-
-
-}
-.Logintext:hover{
-
-  color:orange;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding: 10px 11px;
+  border: 1px solid white;
+  border-radius: 18px
 }

@@ -3,11 +3,16 @@ import React, { useState } from 'react';
 const Array = () => {
   // Array containing 5 questions
   const questions = [
-    "Discuss the role of AI in modern science.",
-    "What are the benefits of machine learning?",
-    "How does artificial intelligence impact daily life?",
-    "Explain the concept of neural networks.",
-    "Discuss the future of AI technology."
+    "Why Speaking English is important in today's world? ",
+    "What are the Pros and Cons of social media in people's life? ",
+    "Tell me about your daily routine",
+    "What do you like to do in free time?",
+    "Talk about your goal and ambition in your life.",
+    "Tell me about the place you visited recently.",
+    "Share your opinion on Junk Food and its effect.",
+    "Describe what do you do if you receive a very large amount of money.",
+    "What would be the world without Internet?",
+    "Describe the problems in your country.",
   ];
 
   // State to hold the randomly selected question

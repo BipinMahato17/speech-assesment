@@ -28,7 +28,7 @@ const Recorder = () => {
       console.error('getUserMedia is not supported by your browser');
       return;
     }
-
+    
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then(stream => {
         setMediaStream(stream);
@@ -118,13 +118,18 @@ const Recorder = () => {
  
   const submitRecording = () => {
     // Prompt the user for the file name
-    const enteredFileName = prompt('Enter the file name:', '');
-  
-    if (enteredFileName) { // If the user entered a file name
+    // const enteredFileName = prompt('Enter the file name:', '');
+    const authSession = localStorage.getItem("authSession");
+    const authSessionObj = JSON.parse(authSession);
+
+// Access the email property
+const email = authSessionObj.email;
+console.log("email ",email)
+    if (email) { // If the user entered a file name
       
       // Sending recorded audio to backend
       const formData = new FormData();
-      formData.append('name', enteredFileName); // Append entered file name
+      formData.append('email', email); // Append entered file name
       formData.append('audio', new Blob(recordedChunks, { type: 'audio/wav' }));
       axios.post('http://127.0.0.1:8000/recorder/', formData,{
 
@@ -133,23 +138,13 @@ const Recorder = () => {
         }
     })
         .then(response => {
-          console.log('Audio uploaded successfully:', response);
+          console.log('Audio uploaded successfully: id is ==== ', response.data.id);
           if (response.status === 201){
             console.log(response.data['wordlist']);
             //Your dictionary data
-let data = {
-    'wordlist': response.data['wordlist'],
-    'unique_wordlist': response.data['unique_wordlist'],
-    'A1_list': response.data['A1_list'],
-    'A2_list': response.data['A2_list'],
-    'B1_list': response.data['B1_list'],
-    'B2_list': response.data['B2_list'],
-    'C1_list': response.data['C1_list'],
-    'C2_list': response.data['C2_list'],
-    'extracted_idioms': response.data['extracted_idioms']
-}
+
             console.log('Audio Uploaded succuessfulyyyyy');
-            navigate('/user/vocabulary', {state: {data: data}})
+            navigate('/user/vocabulary/'+response.data.id)
             
           }
         })

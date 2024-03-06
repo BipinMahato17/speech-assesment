@@ -1,5 +1,5 @@
 .butty {
-color: black;
+/* color: black; */
     border:none;
     background: none;
     text-align:left;
@@ -14,7 +14,8 @@ color: black;
     text-align:left;
 }
 .grid{
-    color:black;
+    /* color:black; */
+    background-color: white;
 }
 /* MyLearning.css */
 

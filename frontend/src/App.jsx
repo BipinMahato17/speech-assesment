@@ -55,7 +55,7 @@ function App() {
           <Route path="/user" element={<PrivateRoutes />} >
           
           {/* <Route path="/login" element={<LogIn setIsLoggedIn={setIsLoggedIn} />} /> */}
-              <Route path="vocabulary" element={<Vocabulary />} />
+              <Route path="vocabulary/:id" element={<Vocabulary />} />
               <Route path="logout" element={<Logout />} />
               <Route path="output" element={<Output />} />
               <Route path="submit" element={<Submit />} />

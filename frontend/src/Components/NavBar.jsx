@@ -58,14 +58,20 @@ const NavBar = () => {
     <nav>
       <p className='appName'>VG Check</p>
       <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About Us</Link></li>
-        <li><Link to="/user/mylearning">My Reports</Link></li>
+        <li><Link className='links' to="/">Home</Link></li>
+        <li><Link className='links' to="/about">About Us</Link></li>
+        <li><Link className='links' to="/user/mylearning">My Reports</Link></li>
       </ul>
       {console.log("is logged in", isLoggedIn())}
+<<<<<<< HEAD
       <Link className='Login' to={loggedIn ? '/user/logout' : '/login'}>
         {loggedIn ? 'Log Out' : 'Log in'}
       </Link>
+=======
+      {isLoggedIn()? <button key={isLoggedIn()} className='Login' ><Link className='Logintext' to="/user/logout">Log Out</Link></button>:
+      <button key={isLoggedIn()} className='LoginBtn'><Link className='Logintext' to="/login">Log in</Link></button>
+  }
+>>>>>>> final
     </nav>
   );
 };
